@@ -7,31 +7,77 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript" src="./js/index.js"></script>
-<title>修繕系統</title>
+<title>待修名單</title>
 </head>
 <body>
-	<form>
-		<div class="form-group">
-			<label for="title">主旨：</label> 
-			<input type="text" class="form-control" id="title">
+	<div id="show-order">
+		<table class="table">
+			<thead class="thead-dark">
+		    	<tr>
+		      		<th scope="col">缺失編號</th>
+		      		<th scope="col">缺失嚴重性</th>
+		      		<th scope="col">缺失說明</th>
+		      		<th scope="col">測試案例編號</th>
+		      		<th scope="col">修復負責人</th>
+		      		<th scope="col">修復狀態</th>
+		      		<th scope="col">修復說明</th>
+		      		<th scope="col">操作</th>
+		    	</tr>
+		  	</thead>
+		  	<tbody id="order-data">
+		  	</tbody>
+		</table>
+		<button class="btn btn-primary" type="button" id="add-order" onclick="callModal(this)">新增缺失</button>
+		<button class="btn btn-primary" type="button" id="delete-all" onclick="deleteAll(this)">清除所有缺失</button>
+	</div>
+	
+	
+	<div id="edit-note-modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+				  <h4 class="modal-title" id="title"></h4>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+			</div>
+			<div class="modal-body">
+				<form id="order-form">
+					<div class="form-group">
+						<label for="missingId">缺失編號：</label>
+						<input class="form-control" id="missing-id" required>
+					</div>
+					<div class="form-group">
+						<label for="severity">缺失嚴重性：</label>
+						<input class="form-control" id="severity" required>
+					</div>
+					<div class="form-group">
+						<label for="missingContent">缺失說明：</label>
+						<input class="form-control" id="missing-content" required>
+					</div>
+					<div class="form-group">
+						<label for="missingNumber">測試案例編號：</label>
+						<input class="form-control" id="missing-number" required>
+					</div>
+					<div class="form-group">
+						<label for="assignee">缺失負責人：</label>
+						<input class="form-control" id="assignee">
+					</div>
+					<div class="form-group">
+						<label for="status">修復狀態：</label>
+						<input class="form-control" id="status" required>
+					</div>
+					<div class="form-group">
+						<label for="repairDescription">修復說明：</label>
+						<input class="form-control" id="repair-description">
+					</div>
+					<button type="button" class="btn btn-primary"  onclick="updateOrder()">確認</button>
+				</form>
+			</div>
+		  </div>
 		</div>
-		<div class="form-group">
-			<label for="content">內容：</label>
-			<textarea class="form-control" id="content" rows="3"></textarea>
-		</div>
-		<div class="form-group">
-			<label for="name">名字：</label> 
-			<input type="text" class="form-control" id="name">
-		</div>
-		<div class="form-group">
-			<label for="phone">電話：</label> 
-			<input type="text" class="form-control" id="phone">
-		</div>
-		<div class="form-group">
-			<label for="address">地址：</label> 
-			<input type="text" class="form-control" id="address">
-		</div>
-	</form>
-	<button type="button" class="btn btn-primary" id="submit">送出</button>
+	 </div>
+
 </body>
 </html>
