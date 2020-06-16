@@ -11,7 +11,7 @@
 </head>
 <body>
 <div>
-	<div class="table-responsive" id="show-order" style="margin:0px auto;overflow-y:auto;height:650px;">
+	<div class="table-responsive" id="show-order" style="margin:0px auto;overflow-y:auto;height:650px;text-align: center;">
 		<table class="table">
 			<thead class="thead-dark">
 		    	<tr>
@@ -29,59 +29,81 @@
 		  	</tbody>
 		</table>
 	</div>
-	<div style="float:right; margin:13px">
+	<div style="float:left; margin:15px">
+		<button class="btn btn-primary" type="button" id="order-by-severity" onclick="orderBy(this)">按照嚴重性排列</button>
+		<button class="btn btn-primary" type="button" id="order-by-status" onclick="orderBy(this)">按照修復狀態排列</button>
+	</div>
+	<div style="float:right; margin:15px">
 			<button class="btn btn-primary" type="button" id="add-order" onclick="callModal(this)">新增缺失</button>
 			<button class="btn btn-primary" type="button" id="delete-all" onclick="deleteAll(this)">清除所有缺失</button>
 	</div>
 </div>
 	
 	
-	<div id="edit-note-modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-				  <h4 class="modal-title" id="title"></h4>
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				  </button>
-			</div>
-			<div class="modal-body">
-				<form id="order-form">
-					<div class="form-group">
-						<label for="missingId">缺失編號：</label>
-						<input class="form-control" id="missing-id" required>
-					</div>
-					<div class="form-group">
-						<label for="severity">缺失嚴重性：</label>
-						<input class="form-control" id="severity" required>
-					</div>
-					<div class="form-group">
-						<label for="missingContent">缺失說明：</label>
-						<input class="form-control" id="missing-content" required>
-					</div>
-					<div class="form-group">
-						<label for="missingNumber">測試案例編號：</label>
-						<input class="form-control" id="missing-number" required>
-					</div>
-					<div class="form-group">
-						<label for="assignee">缺失負責人：</label>
-						<input class="form-control" id="assignee">
-					</div>
-					<div class="form-group">
-						<label for="status">修復狀態：</label>
-						<input class="form-control" id="status" required>
-					</div>
-					<div class="form-group">
-						<label for="repairDescription">修復說明：</label>
-						<input class="form-control" id="repair-description">
-					</div>
-					<button type="button" class="btn btn-primary"  onclick="updateOrder()">確認</button>
-				</form>
-			</div>
-		  </div>
+<div id="edit-note-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <!-- Modal content-->
+	  <div class="modal-content">
+		<div class="modal-header">
+			  <h4 class="modal-title" id="title"></h4>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
 		</div>
-	 </div>
+		<div class="modal-body">
+			<form id="order-form">
+				<div class="form-group">
+					<label for="missingId">缺失編號：</label>
+					<input class="form-control" id="missing-id" required>
+				</div>
+				<div class="form-group">
+					<label for="severity">缺失嚴重性：</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-severity" id="High" value="1" checked>
+						<label class="form-check-label" for="High">High</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-severity" id="Medium" value="2" checked>
+						<label class="form-check-label" for="Middle">Medium</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-severity" id="Low" value="3" checked>
+						<label class="form-check-label" for="Low">Low</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="missingContent">缺失說明：</label>
+					<input class="form-control" id="missing-content" required>
+				</div>
+				<div class="form-group">
+					<label for="missingNumber">測試案例編號：</label>
+					<input class="form-control" id="missing-number" required>
+				</div>
+				<div class="form-group">
+					<label for="assignee">缺失負責人：</label>
+					<input class="form-control" id="assignee">
+				</div>
+				<div class="form-group">
+					<label for="status">修復狀態：</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-status" id="Opened" value="1" checked>
+						<label class="form-check-label" for="Opened">Opened</label>
+					  </div>
+					  <div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-status" id="Closed" value="2" checked>
+						<label class="form-check-label" for="Closed">Closed</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="repairDescription">修復說明：</label>
+					<input class="form-control" id="repair-description">
+				</div>
+				<button type="button" class="btn btn-primary"  onclick="updateOrder()">確認</button>
+			</form>
+		</div>
+	  </div>
+	</div>
+ </div>
 
 </body>
 </html>

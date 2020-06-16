@@ -13,6 +13,10 @@ public interface OrderRepository extends MongoRepository<Order, String> {
 
 	List<Order> findByStatus(String status, Sort sort);
 	
+	List<Order> findBySeverity(String severity, Sort sort);
+	
+	List<Order> findByStatusAndSeverity(String status, String severity, Sort sort);
+	
 	List<Order> findByMissingId(String missingId);
 
 }

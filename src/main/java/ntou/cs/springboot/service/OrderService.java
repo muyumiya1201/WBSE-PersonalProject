@@ -63,16 +63,26 @@ public class OrderService {
 
 	public List<Order> getOrders(QueryParameter param) {
 		String status = param.getStatus();
+		String severity = param.getSeverity();
+		System.out.println("status = " + status);
+		System.out.println("severity = " + severity);
 		
 		Sort sort = null;
 		Sort.Direction direction = Sort.Direction.ASC;
-		sort = Sort.by(direction, "missingId");
-
-		if (status != null) {
-			return repository.findByStatus(status, sort);
+		
+		
+		if (status != null && severity == null) {
+			System.out.println("status");
+			sort = Sort.by(direction, "status");
+		} else if (status == null && severity != null) {
+			System.out.println("severity");
+			sort = Sort.by(direction, "severity");
 		} else {
-			return repository.findAll(sort);
+			System.out.println("no");
+			sort = Sort.by(direction, "missingId");
 		}
+		
+		return repository.findAll(sort);
 	}
 
 }

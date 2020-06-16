@@ -7,9 +7,9 @@ public class OrderRequest {
 	private String missingContent;
 	private String missingNumber;
 	private String Assignee;
-	private String status;
+	private int status;
 	private String repairDescription;
-	private String severity;
+	private int severity;
 
 	public String getId() {
 		return id;
@@ -59,19 +59,19 @@ public class OrderRequest {
 		this.repairDescription = repairDescription;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	
-	public String getSeverity() {
+	public int getSeverity() {
 		return severity;
 	}
 
-	public void setSeverity(String severity) {
+	public void setSeverity(int severity) {
 		this.severity = severity;
 	}
 }
