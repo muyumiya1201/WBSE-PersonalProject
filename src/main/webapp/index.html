@@ -7,10 +7,11 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript" src="./js/index.js"></script>
-<title>待修名單</title>
+<title>缺失表格</title>
 </head>
 <body>
-	<div id="show-order">
+<div>
+	<div class="table-responsive" id="show-order" style="margin:0px auto;overflow-y:auto;height:650px;">
 		<table class="table">
 			<thead class="thead-dark">
 		    	<tr>
@@ -27,9 +28,12 @@
 		  	<tbody id="order-data">
 		  	</tbody>
 		</table>
-		<button class="btn btn-primary" type="button" id="add-order" onclick="callModal(this)">新增缺失</button>
-		<button class="btn btn-primary" type="button" id="delete-all" onclick="deleteAll(this)">清除所有缺失</button>
 	</div>
+	<div style="float:right; margin:13px">
+			<button class="btn btn-primary" type="button" id="add-order" onclick="callModal(this)">新增缺失</button>
+			<button class="btn btn-primary" type="button" id="delete-all" onclick="deleteAll(this)">清除所有缺失</button>
+	</div>
+</div>
 	
 	
 	<div id="edit-note-modal" class="modal fade" role="dialog">
