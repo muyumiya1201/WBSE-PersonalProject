@@ -7,20 +7,21 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript" src="./js/index.js"></script>
+<link rel="stylesheet" href="./css/index.css">
 <title>缺失表格</title>
 </head>
 <body>
 <div>
-	<div class="table-responsive" id="show-order" style="margin:0px auto;overflow-y:auto;height:650px;text-align: center;">
+	<div class="table-responsive" id="show-order">
 		<table class="table">
 			<thead class="thead-dark">
-		    	<tr>
-		      		<th scope="col">缺失編號</th>
-		      		<th scope="col">缺失嚴重性</th>
+		    	<tr id="top-bar">
+		      		<th scope="col" id="order-by-missing" onclick="orderBy(this)">缺失編號</th>
+		      		<th scope="col" id="order-by-severity" onclick="orderBy(this)">缺失嚴重性</th>
 		      		<th scope="col">缺失說明</th>
 		      		<th scope="col">測試案例編號</th>
 		      		<th scope="col">修復負責人</th>
-		      		<th scope="col">修復狀態</th>
+		      		<th scope="col" id="order-by-status" onclick="orderBy(this)">修復狀態</th>
 		      		<th scope="col">修復說明</th>
 		      		<th scope="col">操作</th>
 		    	</tr>
@@ -29,14 +30,18 @@
 		  	</tbody>
 		</table>
 	</div>
-	<div style="float:left; margin:15px">
-		<button class="btn btn-primary" type="button" id="order-by-severity" onclick="orderBy(this)">按照嚴重性排列</button>
-		<button class="btn btn-primary" type="button" id="order-by-status" onclick="orderBy(this)">按照修復狀態排列</button>
+	<div id="function-button">
+		<div id="order-button">
+			<button class="btn btn-primary" type="button" id="order-by-missing" onclick="orderBy(this)">按照缺失編號排列</button>
+			<button class="btn btn-primary" type="button" id="order-by-severity" onclick="orderBy(this)">按照嚴重性排列</button>
+			<button class="btn btn-primary" type="button" id="order-by-status" onclick="orderBy(this)">按照修復狀態排列</button>
+		</div>
+		<div id="do-button">
+				<button class="btn btn-primary" type="button" id="add-order" onclick="callModal(this)">新增缺失</button>
+				<button class="btn btn-primary" type="button" id="delete-all" onclick="deleteAll(this)">清除所有缺失</button>
+		</div>
 	</div>
-	<div style="float:right; margin:15px">
-			<button class="btn btn-primary" type="button" id="add-order" onclick="callModal(this)">新增缺失</button>
-			<button class="btn btn-primary" type="button" id="delete-all" onclick="deleteAll(this)">清除所有缺失</button>
-	</div>
+	
 </div>
 	
 	

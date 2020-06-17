@@ -1,0 +1,29 @@
+#top-bar th{
+    position: sticky; 
+    top: 0;
+}
+
+
+#show-order{
+    margin:0px auto;
+    overflow-y:auto;
+    height:90vh;
+    text-align: center;
+}
+
+#function-button{
+    position: fixed; 
+    width: 100%; 
+    bottom: 1px;
+}
+
+#order-button{
+    float:left;
+    margin: 15px;
+}
+
+
+#do-button{
+    float:right; 
+    margin: 15px;
+}
