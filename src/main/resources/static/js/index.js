@@ -36,8 +36,12 @@ async function showOrder(resultData){
     	if(order.repairDescription == ""){
     		order.repairDescription = "無";
     	}
-    	
-		tmp += `<tr id="${order.id}">
+    	if (order.status == 2){
+			tmp+=`<tr class="table-success" id="${order.id}">`;
+		} else {
+			tmp+=`<tr class="table-danger" id="${order.id}">`;
+		}
+		tmp += `
 					<th scope="row">${order.missingId}</th>
 					<td>${severity[order.severity]}</td>
 					<td>${order.missingContent}</td>
@@ -107,12 +111,11 @@ function callModal(element){
 }
 
 function initModal(){
-
-	const length = $('.modal-body input').length;
-
-	for(let i = 0; i < length; i++){
-		$('.modal-body input')[i].value = "";
-	}
+	document.getElementById('missing-id').value = "";
+	document.getElementById('missing-content').value = "";
+	document.getElementById('missing-number').value = "";
+	document.getElementById('assignee').value = "";
+	document.getElementById('repair-description').value = "";
 }
 
 async function updateOrder(){
@@ -121,17 +124,22 @@ async function updateOrder(){
 		let missingData =  $('.modal-body input');
 		
 		
-		const severityId = $("input[name='missing-severity']:checked").attr('id');
-		const statusId = $("input[name='missing-status']:checked").attr('id');
+		//const severityId = $("input[name='missing-severity']:checked").attr('id');
+		//const statusId = $("input[name='missing-status']:checked").attr('id');
+		
+		const severityId = $("input[name='missing-severity']:checked").val();
+		const statusId = $("input[name='missing-status']:checked").val();
 		
 		let order = { 'missingId' : missingData[0].value,
-					'severity' : severity.indexOf(severityId),
+					'severity' : severityId,//severity.indexOf(severityId),
 					'missingContent' : missingData[4].value,
 					'missingNumber' : missingData[5].value,
 					'assignee' : missingData[6].value,
-					'status' : status.indexOf(statusId),
+					'status' : statusId,//status.indexOf(statusId),
 					'repairDescription' : missingData[9].value,
 				};
+		
+		console.log(order);
 		
 		let postUrl = '/repair';
 		if(method == 'PUT') {

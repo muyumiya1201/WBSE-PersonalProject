@@ -64,21 +64,16 @@ public class OrderService {
 	public List<Order> getOrders(QueryParameter param) {
 		String status = param.getStatus();
 		String severity = param.getSeverity();
-		System.out.println("status = " + status);
-		System.out.println("severity = " + severity);
 		
 		Sort sort = null;
 		Sort.Direction direction = Sort.Direction.ASC;
 		
 		
 		if (status != null && severity == null) {
-			System.out.println("status");
-			sort = Sort.by(direction, "status");
+			sort = Sort.by(direction, "status", "missingId");
 		} else if (status == null && severity != null) {
-			System.out.println("severity");
-			sort = Sort.by(direction, "severity");
+			sort = Sort.by(direction, "severity", "missingId");
 		} else {
-			System.out.println("no");
 			sort = Sort.by(direction, "missingId");
 		}
 		
