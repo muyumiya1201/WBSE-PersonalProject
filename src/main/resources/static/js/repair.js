@@ -102,7 +102,7 @@ function callModal(element){
 		document.getElementById('missing-id').value = $(`#${orderId} th`)[0].innerText;
 		$(`input[name="missing-severity"][id=${severity}]`).prop('checked', true);
 		document.getElementById('missing-content').value = $(`#${orderId} td`)[1].innerText;
-		document.getElementById('missing-number').value = $(`#${orderId} td`)[2].innerText;
+		document.getElementById('missing-number').innerText = $(`#${orderId} td`)[2].innerText;
 		document.getElementById('assignee').value = $(`#${orderId} td`)[3].innerText;
 		$(`input[name="missing-status"][id=${status}]`).prop('checked', true);
 		document.getElementById('repair-description').value = $(`#${orderId} td`)[5].innerText;
@@ -113,8 +113,10 @@ function callModal(element){
 function initModal(){
 	document.getElementById('missing-id').value = "";
 	document.getElementById('missing-content').value = "";
-	document.getElementById('missing-number').value = "";
+	$(`input[name="missing-severity"][id="High"]`).prop('checked', true);
+	document.getElementById('missing-number').innerText = "";
 	document.getElementById('assignee').value = "";
+	$(`input[name="missing-status"][id="Opened"]`).prop('checked', true);
 	document.getElementById('repair-description').value = "";
 }
 
@@ -123,23 +125,18 @@ async function updateOrder(){
 	if(document.forms['order-form'].reportValidity()){
 		let missingData =  $('.modal-body input');
 		
-		
-		//const severityId = $("input[name='missing-severity']:checked").attr('id');
-		//const statusId = $("input[name='missing-status']:checked").attr('id');
-		
 		const severityId = $("input[name='missing-severity']:checked").val();
 		const statusId = $("input[name='missing-status']:checked").val();
+		const missingNumber = document.getElementById('missing-number').innerText;
 		
 		let order = { 'missingId' : missingData[0].value,
-					'severity' : severityId,//severity.indexOf(severityId),
+					'severity' : severityId,
 					'missingContent' : missingData[4].value,
-					'missingNumber' : missingData[5].value,
-					'assignee' : missingData[6].value,
-					'status' : statusId,//status.indexOf(statusId),
-					'repairDescription' : missingData[9].value,
+					'missingNumber' : missingNumber,
+					'assignee' : missingData[5].value,
+					'status' : statusId,
+					'repairDescription' : missingData[8].value,
 				};
-		
-		console.log(order);
 		
 		let postUrl = '/repair';
 		if(method == 'PUT') {
@@ -163,7 +160,6 @@ async function updateOrder(){
 		if (result.status === 201 || result.status === 200) {
 			window.location.reload();
 		} else {
-			// document.getElementById('login-wrong').innerText = '帳號或密碼錯誤';
 		}
 
 	}
@@ -190,8 +186,46 @@ async function orderBy(element){
 }
 
 
+async function getTestcaseId(){
+	
+	const getUrl = '/testcase';
+	
+	const result = await fetch(getUrl, {
+		cache : 'no-cache',
+		credentials : 'same-origin',
+		headers : {
+			'user-agent' : 'Mozilla/4.0 MDN Example',
+			'content-type' : 'application/json',
+		},
+		method : 'GET',
+		mode : 'cors',
+		redirect : 'follow',
+		referrer : 'no-referrer',
+	});	
+	
+	const resultData = await result.json();
+	showTestcaseId(resultData);
+}
+
+async function showTestcaseId(resultData){
+	const testcaseIdResult = document.getElementById('testcase-id');
+    let tmp = "";
+    resultData.forEach(testcaseId => {
+		tmp += `<button class="dropdown-item" type="button" id="${testcaseId.identification}" onclick="setTestcaseId(this)">${testcaseId.identification}</button>`;
+	});
+    testcaseIdResult.innerHTML = tmp;
+	
+}
+
+function setTestcaseId(element){
+	const testcaseId = element.id;
+	document.getElementById('missing-number').innerText = testcaseId;
+}
+
+
 function init(){
 	getOrder();
+	getTestcaseId();
 }
 
 window.addEventListener('load', init);

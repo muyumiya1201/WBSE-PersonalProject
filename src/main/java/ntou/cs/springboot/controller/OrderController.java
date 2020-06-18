@@ -50,8 +50,8 @@ public class OrderController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Order> replaceOrder(@PathVariable("id") String missingId, @Valid @RequestBody OrderRequest request) {
-		Order product = orderService.replaceOrder(missingId, request);
-		return ResponseEntity.ok(product);
+		Order order = orderService.replaceOrder(missingId, request);
+		return ResponseEntity.ok(order);
 	}
 
 	@DeleteMapping(value = "/{id}")

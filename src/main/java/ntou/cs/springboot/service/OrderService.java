@@ -27,7 +27,7 @@ public class OrderService {
 	}
 
 	public Order getOrder(String id) {
-		return repository.findById(id).orElseThrow(() -> new NotFoundException("Can't find product."));
+		return repository.findById(id).orElseThrow(() -> new NotFoundException("Can't find Order."));
 	}
 
 	public Order createOrder(OrderRequest request) {

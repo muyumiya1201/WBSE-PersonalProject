@@ -17,6 +17,11 @@
     bottom: 1px;
 }
 
+#go-button{
+    float: left; 
+    margin: 15px;
+}
+
 
 #do-button{
     float:right; 

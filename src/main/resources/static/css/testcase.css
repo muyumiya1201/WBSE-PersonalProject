@@ -1,0 +1,42 @@
+.card{
+    width: 21rem;
+	height: auto;
+	float: left;
+	margin: 15px;
+}
+
+.table-responsive{
+    margin:0px auto;
+    overflow-y:auto;
+    height:90vh;
+    text-align: center;
+}
+
+#show-testcase{
+	margin-right: auto;
+ 	margin-left: auto;
+ 	padding-right: 15px;
+ 	padding-left: 15px;
+}
+
+#function-button{
+    position: fixed; 
+    width: 100%; 
+    bottom: 1px;
+}
+
+#go-button{
+    float: left; 
+    margin: 15px;
+}
+
+
+#do-button{
+    float:right; 
+    margin: 15px;
+}
+
+
+.card-body#fail{
+    background-color: #FFB6C1;
+}

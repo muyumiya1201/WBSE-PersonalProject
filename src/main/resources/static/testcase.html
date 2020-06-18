@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/testcase.js"></script>
+<link rel="stylesheet" href="./css/testcase.css">
+<title>測試案例</title>
+</head>
+<body>
+	<div class="table-responsive">
+		<div id="show-testcase">	
+		</div>
+
+		<div id="function-button">
+			<div id="go-button">
+				<button class="btn btn-primary" type="button" id="go-repair" onclick="location.href='repair.html'" >前往缺失表格</button>
+			</div>
+			<div id="do-button">
+					<button class="btn btn-primary" type="button" id="add-testcase" onclick="callModal(this)">新增測試案例</button>
+					<button class="btn btn-primary" type="button" id="delete-all" onclick="deleteAll(this)">清除所有測試案例</button>
+			</div>
+		</div>
+	</div>
+
+	
+	
+<div id="edit-note-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+	  <!-- Modal content-->
+	  <div class="modal-content">
+		<div class="modal-header">
+			  <h4 class="modal-title" id="title"></h4>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+		</div>
+		<div class="modal-body">
+			<form id="testcase-form">
+				<div class="form-group">
+					<label for="identification">Identification:</label>
+					<input class="form-control" id="identification" required>
+				</div>
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input class="form-control" id="name" required>
+				</div>
+				<div class="form-group">
+					<label for="tested-target">Tested target:</label>
+					<input class="form-control" id="tested-target" required>
+				</div>
+				<div class="form-group">
+					<label for="severity">Severity:</label>
+					<input class="form-control" id="severity" required>
+				</div>
+				<div class="form-group">
+					<label for="input">Input:</label>
+					<input class="form-control" id="input">
+				</div>
+				<div class="form-group">
+					<label for="instruction">Instruction:</label>
+					<textarea class="form-control" id="instruction" rows="3"></textarea>
+				  </div>
+				<div class="form-group">
+					<label for="expected-result">Expected result:</label>
+					<input class="form-control" id="expected-result" required>
+				</div>
+				<div class="form-group">
+					<label for="test-result">Test result:</label>
+					<input class="form-control" id="test-result" required>
+				</div>
+				<button type="button" class="btn btn-primary"  onclick="updateTestcase()">確認</button>
+			</form>
+		</div>
+	  </div>
+	</div>
+ </div>
+
+</body>
+</html>
