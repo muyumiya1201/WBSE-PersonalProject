@@ -53,8 +53,19 @@
 					<input class="form-control" id="tested-target" required>
 				</div>
 				<div class="form-group">
-					<label for="severity">Severity:</label>
-					<input class="form-control" id="severity" required>
+					<label for="severity">Severity:&nbsp;</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-severity" id="High" value="1" checked>
+						<label class="form-check-label" for="High">High</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-severity" id="Medium" value="2">
+						<label class="form-check-label" for="Middle">Medium</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="missing-severity" id="Low" value="3">
+						<label class="form-check-label" for="Low">Low</label>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="input">Input:</label>
@@ -69,8 +80,15 @@
 					<input class="form-control" id="expected-result" required>
 				</div>
 				<div class="form-group">
-					<label for="test-result">Test result:</label>
-					<input class="form-control" id="test-result" required>
+					<label for="test-result">Test result:&nbsp;</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="test-result" id="Pass" value="1" checked>
+						<label class="form-check-label" for="High">Pass</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="test-result" id="Fail" value="2">
+						<label class="form-check-label" for="Middle">Fail</label>
+					</div>
 				</div>
 				<button type="button" class="btn btn-primary"  onclick="updateTestcase()">確認</button>
 			</form>

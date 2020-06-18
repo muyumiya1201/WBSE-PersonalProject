@@ -9,11 +9,11 @@ public class Testcase {
 	private String identification;
 	private String name;
 	private String testedTarget;
-	private String severity;
+	private int severity;
 	private String input;
 	private String instruction;
 	private String expectedResult;
-	private String testResult;
+	private int testResult;
 
 	public String getId() {
 		return id;
@@ -47,11 +47,11 @@ public class Testcase {
 		this.testedTarget = testedTarget;
 	}
 
-	public String getSeverity() {
+	public int getSeverity() {
 		return severity;
 	}
 
-	public void setSeverity(String severity) {
+	public void setSeverity(int severity) {
 		this.severity = severity;
 	}
 
@@ -79,11 +79,11 @@ public class Testcase {
 		this.expectedResult = expectedResult;
 	}
 
-	public String getTestResult() {
+	public int getTestResult() {
 		return testResult;
 	}
 
-	public void setTestResult(String testResult) {
+	public void setTestResult(int testResult) {
 		this.testResult = testResult;
 	}
 

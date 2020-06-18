@@ -2,8 +2,9 @@
 let updateTestcaseId = "";
 let method = "";
 
-const modalId = ['identification', 'name', 'tested-target', 'severity', 'input', 'instruction', 'expected-result', 'test-result'];
-
+const modalId = ['identification', 'name', 'tested-target', 'input', 'instruction', 'expected-result'];
+const severity = ['', 'High', 'Medium', 'Low'];
+const testResultStatus = ['', 'Pass', 'Fail'];
 
 async function getTestcase(){
 
@@ -31,12 +32,10 @@ async function showTestcase(resultData){
     let tmp = "";
     
     resultData.forEach(testcase => {
-        let colorId = "fail";
-    	if(testcase.testResult.toLowerCase() == "pass"){
-            console.log(testcase.testResult.toLowerCase());
-    		colorId = "pass";
+        let colorId = "color-fail";
+    	if(testcase.testResult == "1"){
+    		colorId = "color-pass";
         }
-        console.log(testcase.testResult + " - " + testcase.identification + " - " + colorId);
         tmp += `    
             <div class="card border-dark" id="${testcase.id}">
                 <div class="card-body" id=${colorId}>
@@ -52,7 +51,7 @@ async function showTestcase(resultData){
                         </tr>
                         <tr>
                             <th scope="row">Severity:</th>
-                            <td>${testcase.severity}</td>
+                            <td>${severity[testcase.severity]}</td>
                         </tr>
                         <tr>
                             <th scope="row">Input:</th>
@@ -68,7 +67,7 @@ async function showTestcase(resultData){
                         </tr>
                         <tr>
                             <th scope="row">Test result:</th>
-                            <td>${testcase.testResult}</td>
+                            <td>${testResultStatus[testcase.testResult]}</td>
                         </tr>
                         <tr>
                             <th scope="row"</th>
@@ -101,19 +100,25 @@ function callModal(element){
 
 		updateTestcaseId = testcaseId;
         method = 'PUT';
+        
+        const severity = $(`#${testcaseId} td`)[2].innerText;
+        const testResult = $(`#${testcaseId} td`)[6].innerText;
 
-        for(let i = 0; i < 7; i++){
-            document.getElementById(`${modalId[i+1]}`).value = testcaseData[i].innerHTML;
-        }
-		
-		document.getElementById('identification').value =  $(`#${testcaseId} b`)[0].innerHTML;
+        document.getElementById('identification').value =  $(`#${testcaseId} b`)[0].innerHTML;
+        document.getElementById('name').value = testcaseData[0].innerText;
+        document.getElementById('tested-target').value = testcaseData[1].innerText;
+        $(`input[name="missing-severity"][id=${severity}]`).prop('checked', true);
+        document.getElementById('input').value = testcaseData[3].innerText;
+        document.getElementById('instruction').value = testcaseData[4].innerText;
+        document.getElementById('expected-result').value = testcaseData[5].innerText;
+        $(`input[name="test-result"][id=${testResult}]`).prop('checked', true);
 	}
 	$('#edit-note-modal').modal('show');
 }
 
 function initModal(){
     
-    for(let i = 0; i < 8; i++){
+    for(let i = 0; i < modalId.length; i++){
         document.getElementById(`${modalId[i]}`).value = "";
     }
 }
@@ -122,19 +127,22 @@ function initModal(){
 async function updateTestcase(){
     if(document.forms['testcase-form'].reportValidity()){
 
-		let testcaseData =  $('.modal-body input');		
-		const instruction = document.getElementById('instruction').value;
+        let testcaseData =  $('.modal-body input');		
+        const severityId = $("input[name='missing-severity']:checked").val();
+        const testResultId = $("input[name='test-result']:checked").val();
+        const instructionText = document.getElementById('instruction').value;
 		
 		let testcase = {'identification' : testcaseData[0].value,
                         'name' :  testcaseData[1].value,
                         'testedTarget' : testcaseData[2].value,
-                        'severity' :  testcaseData[3].value,
-                        'input' : testcaseData[4].value,
-                        'instruction' : instruction,
-                        'expectedResult' : testcaseData[5].value,
-                        'testResult' : testcaseData[6].value
-				    };
-		
+                        'severity' :  severityId,
+                        'input' : testcaseData[6].value,
+                        'instruction' : instructionText,
+                        'expectedResult' : testcaseData[7].value,
+                        'testResult' : testResultId
+                    };
+
+
 		let postUrl = '/testcase';
 		if(method == 'PUT') {
 			postUrl = '/testcase/' + testcaseData[0].value;

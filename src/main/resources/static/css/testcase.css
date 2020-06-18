@@ -30,13 +30,11 @@
     margin: 15px;
 }
 
-
 #do-button{
     float:right; 
     margin: 15px;
 }
 
-
-.card-body#fail{
+.card-body#color-fail{
     background-color: #FFB6C1;
 }
